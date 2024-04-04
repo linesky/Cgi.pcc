@@ -1,7 +1,10 @@
 //#!/usr/bin/tcc -run
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
 
+#include <time.h>
 
 void title(char *t){
 	printf ("<html><head><title>",t);
@@ -69,17 +72,19 @@ void clstyle(){
 
 
 int main(){
+	time_t tt;
 	int n=0;
 	int h=1;
 	char t[]="hello world";
+	char ss[120];
+	tt=time(NULL);
+	snprintf(ss,sizeof(ss),"%.24s",ctime(&tt));
 	title(t);
 		par();
 			bold();
 				h=1;
 				heads(h);
-					for (n=0;n<16;n++){
-						printf ("%d",(char)rand()/28);
-					}
+					printf ("%s\r\n",ss);
 				closesheads(h);
 			closesbold();
 		closespar;
